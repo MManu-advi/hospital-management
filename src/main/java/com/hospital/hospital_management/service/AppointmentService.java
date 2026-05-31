@@ -11,6 +11,7 @@ import com.hospital.hospital_management.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -28,6 +29,10 @@ public class AppointmentService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+	private Long patientId;
+
+	private Long doctorId;
 
     // ─────────────────────────────────────────────
     // CREATE - Book a new appointment
@@ -49,15 +54,17 @@ public class AppointmentService {
                 .countByDoctorIdAndAppointmentDate(doctor.getId(), request.getAppointmentDate());
         int tokenNumber = (int) existingAppointments + 1;
 
-        // Build the appointment entity
-        Appointment appointment = Appointment.builder()
-                .patient(patient)
-                .doctor(doctor)
-                .appointmentDate(request.getAppointmentDate())
-                .slotTime(request.getSlotTime())
-                .tokenNumber(tokenNumber)
-                .status(request.getStatus() != null ? request.getStatus() : "SCHEDULED")
-                .build();
+   
+        Appointment appointment = new Appointment();
+
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
+        appointment.setAppointmentDate(request.getAppointmentDate());
+        appointment.setSlotTime(request.getSlotTime());
+        appointment.setTokenNumber(tokenNumber);
+        appointment.setStatus(
+                request.getStatus() != null ? request.getStatus() : "SCHEDULED"
+        );
 
         return appointmentRepository.save(appointment);
     }
@@ -132,3 +139,6 @@ public class AppointmentService {
         return appointmentRepository.findByDoctorId(doctorId);
     }
 }
+
+
+

@@ -1,6 +1,5 @@
 package com.hospital.hospital_management.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,11 +24,11 @@ public class Doctor {
     @Column(nullable = false)
     private String name;
 
-    private String specialization;
+    private String specialization; // e.g., "Cardiologist", "Dermatologist"
 
-    private Integer experience;
+    private Integer experience; // Years of experience
 
-    private String availableTime;
+    private String availableTime; // e.g., "9:00 AM - 1:00 PM"
 
     @Column(unique = true)
     private String phone;
@@ -39,13 +38,9 @@ public class Doctor {
 
     /**
      * One doctor can have many appointments.
+     * mappedBy = "doctor" refers to the 'doctor' field in Appointment entity.
      */
-    @JsonIgnore
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Appointment> appointments;
-
-public Long getId() {
-    return id;
-}
 }

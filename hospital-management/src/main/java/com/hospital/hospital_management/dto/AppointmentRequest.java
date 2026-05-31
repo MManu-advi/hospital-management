@@ -28,45 +28,4 @@ public class AppointmentRequest {
     private LocalDate appointmentDate;
     private LocalTime slotTime;
     private String status;          // Optional; defaults to "SCHEDULED" in service layer
-
-
-public Long getPatientId() {
-    return getPatientId();
-}
-
-public void setPatientId(Long patientId) {
-    this.patientId = patientId;
-}
-
-public Long getDoctorId() {
-    return getDoctorId();
-}
-
-public void setDoctorId(Long doctorId) {
-    this.doctorId = doctorId;
-}
-
-public LocalDate getAppointmentDate() {
-    return getAppointmentDate();
-}
-
-public void setAppointmentDate(LocalDate appointmentDate) {
-    this.appointmentDate = appointmentDate;
-}
-
-public LocalTime getSlotTime() {
-    return slotTime;
-}
-
-public void setSlotTime(LocalTime slotTime) {
-    this.slotTime = slotTime;
-}
-
-public String getStatus() {
-    return status;
-}
-
-public void setStatus(String status) {
-    this.status = status;
-}
 }

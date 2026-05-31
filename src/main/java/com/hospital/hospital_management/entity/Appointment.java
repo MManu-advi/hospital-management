@@ -30,7 +30,63 @@ public class Appointment {
 
     private Integer tokenNumber;
 
-    private String status;
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDate getAppointmentDate() {
+		return appointmentDate;
+	}
+
+	public void setAppointmentDate(LocalDate appointmentDate) {
+		this.appointmentDate = appointmentDate;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+	public LocalTime getSlotTime() {
+		return slotTime;
+	}
+
+	public void setSlotTime(LocalTime slotTime) {
+		this.slotTime = slotTime;
+	}
+
+	public Integer getTokenNumber() {
+		return tokenNumber;
+	}
+
+	public void setTokenNumber(Integer tokenNumber) {
+		this.tokenNumber = tokenNumber;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	private String status;
 
     /**
      * Many appointments can belong to one patient.
