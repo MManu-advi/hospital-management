@@ -42,7 +42,7 @@ public class AuthService {
 
     // ─────────────────────────────────────────────
     // ADMIN LOGIN
-     LoginResponse adminLogin(LoginRequest request) {
+     public LoginResponse adminLogin(LoginRequest request) {
 
         // 1. Find admin by email — throw 404 if not found
         Admin admin = adminRepository.findByEmail(request.getEmail())
