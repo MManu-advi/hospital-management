@@ -30,31 +30,35 @@ public class AppointmentService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-	private Long patientId;
-
-	private Long doctorId;
-
+	
     // ─────────────────────────────────────────────
     // CREATE - Book a new appointment
     // ─────────────────────────────────────────────
     public Appointment addAppointment(AppointmentRequest request) {
-        // Validate that patient exists
+
+        System.out.println("STEP 1");
+
         Patient patient = patientRepository.findById(request.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Patient not found with id: " + request.getPatientId()));
 
-        // Validate that doctor exists
+        System.out.println("STEP 2");
+
         Doctor doctor = doctorRepository.findById(request.getDoctorId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Doctor not found with id: " + request.getDoctorId()));
 
-        // Auto-generate token number based on how many appointments the doctor already
-        // has on that date (acts like a queue ticket)
+        System.out.println("STEP 3");
+
         long existingAppointments = appointmentRepository
-                .countByDoctorIdAndAppointmentDate(doctor.getId(), request.getAppointmentDate());
+                .countByDoctorIdAndAppointmentDate(
+                        doctor.getId(),
+                        request.getAppointmentDate());
+
+        System.out.println("STEP 4");
+
         int tokenNumber = (int) existingAppointments + 1;
 
-   
         Appointment appointment = new Appointment();
 
         appointment.setPatient(patient);
@@ -66,7 +70,13 @@ public class AppointmentService {
                 request.getStatus() != null ? request.getStatus() : "SCHEDULED"
         );
 
-        return appointmentRepository.save(appointment);
+        System.out.println("STEP 5");
+
+        Appointment saved = appointmentRepository.save(appointment);
+
+        System.out.println("STEP 6");
+
+        return saved;
     }
 
     // ─────────────────────────────────────────────

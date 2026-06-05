@@ -1,6 +1,8 @@
 package com.hospital.hospital_management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,10 +14,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "doctors")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Doctor {
 
     @Id
@@ -42,9 +46,7 @@ public class Doctor {
      */
     @JsonIgnore
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @ToString.Exclude
     private List<Appointment> appointments;
-
 public Long getId() {
     return id;
 }

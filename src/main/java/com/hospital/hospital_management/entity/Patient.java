@@ -1,6 +1,8 @@
 package com.hospital.hospital_management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,11 +14,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "patients")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Patient {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +39,7 @@ public class Patient {
 
     @Column(unique = true)
     private String email;
-
+    @JsonIgnore
     private String password;
 
     public String getPassword() {
@@ -104,8 +109,7 @@ public class Patient {
 	/**
      * One patient can have many appointments.
      */
-    @JsonIgnore
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<Appointment> appointments;
+	@JsonIgnore
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Appointment> appointments;
 }

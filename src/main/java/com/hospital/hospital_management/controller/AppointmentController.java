@@ -47,12 +47,12 @@ public class AppointmentController {
      *   3. Save and return the appointment.
      */
     @PostMapping
-    public ResponseEntity<Appointment> addAppointment(@RequestBody AppointmentRequest request) {
-        Appointment savedAppointment = appointmentService.addAppointment(request);
-        return new ResponseEntity<>(savedAppointment, HttpStatus.CREATED); // 201 Created
-    }
+    public ResponseEntity<String> addAppointment(@RequestBody AppointmentRequest request) {
 
-    // ─────────────────────────────────────────────
+        appointmentService.addAppointment(request);
+
+        return ResponseEntity.ok("Appointment Booked Successfully");
+    }    // ─────────────────────────────────────────────
     // GET /appointments
     // Retrieve all appointments
     // ─────────────────────────────────────────────

@@ -13,7 +13,8 @@ import java.time.LocalTime;
  */
 @Entity
 @Table(name = "appointments")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

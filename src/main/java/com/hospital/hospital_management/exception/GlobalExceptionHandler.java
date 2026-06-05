@@ -60,16 +60,5 @@ public class GlobalExceptionHandler {
      * Handles IllegalArgumentException (HTTP 400 Bad Request).
      * Useful when invalid data is passed (e.g., negative age).
      */
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(
-            IllegalArgumentException ex) {
-
-        Map<String, Object> errorDetails = new HashMap<>();
-        errorDetails.put("timestamp", LocalDateTime.now());
-        errorDetails.put("status", HttpStatus.BAD_REQUEST.value());
-        errorDetails.put("error", "Bad Request");
-        errorDetails.put("message", ex.getMessage());
-
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-    }
+    
 }
